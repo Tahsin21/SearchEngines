@@ -173,11 +173,11 @@ tokenIDs = []
 with gzip.open(gzipFile, 'rt') as finder:
     for line in finder:
         doc.append(line)
-        if line.strip() == '</DOC>':  
+        if line.strip() == '</DOC>':  # Stripping leading/trailing whitespaces to match correctly
             docno,date,title,text,graphic = extractMeta(doc)
             data[counter] = {'DOCNO': docno, 'Date': date, 'Title': title}
             text = title + " " + text + " " + graphic
-            tokens = tokenize(text)
+            tokens = (tokenize(text))
             tokenIDs, tokenIDMap = tokensToID(tokens, lexicon)
             allTokenIDMap.update(tokenIDMap)
             allTokenIDs.append(tokenIDs)
